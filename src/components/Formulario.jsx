@@ -13,7 +13,8 @@ const initialValues = {
   social: {
     facebook: "",
     twitter: ""
-  }
+  },
+  phoneNumbers: ["", ""]
 }
 const onSubmit = (values) => {
   console.log(values)
@@ -95,6 +96,26 @@ return (
           className='form-control '
         />
         <ErrorMessage name='twitter' />
+      </div>
+      <div className="form-group">
+        <label htmlFor='phoneNumbers'>phoneNumbers0</label>
+        <Field
+          type='textarea'
+          id='phoneNumbers'
+          name='phoneNumbers[0]'
+          className='form-control '
+        />
+        <ErrorMessage name='phoneNumbers' />
+      </div>
+      <div className="form-group">
+        <label htmlFor='phoneNumbers'>phoneNumbers1</label>
+        <Field
+          type='textarea'
+          id='phoneNumbers'
+          name='phoneNumbers[1]'
+          className='form-control '
+        />
+        <ErrorMessage name='phoneNumbers[1]' />
       </div>
       <div className="form-group">
         <label htmlFor='address'>Address</label>
