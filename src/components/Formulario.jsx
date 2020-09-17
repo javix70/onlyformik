@@ -6,7 +6,9 @@ import * as Yup from 'yup'
 const initialValues = {
   name: "",
   email: "",
-  channel: ""
+  channel: "",
+  comments: "",
+  address: "",
 }
 const onSubmit = (values) => {
   console.log(values)
@@ -56,6 +58,34 @@ return (
           className='form-control '
         />
         <ErrorMessage name='channel' />
+      </div>
+      <div className="form-group">
+        <label htmlFor='comments'>Comments</label>
+        <Field
+          type='textarea'
+          id='comments'
+          name='comments'
+          className='form-control '
+        />
+        <ErrorMessage name='comments' />
+      </div>
+      <div className="form-group">
+        <label htmlFor='address'>Address</label>
+        <Field
+          name='address'
+          className='form-control '
+        >
+          {
+            (props) => {
+              const { field, form, meta } = props
+              console.log("Render Props", props)
+              return <div>
+                <input type="text" id='address' {...field} />
+                {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+              </div>
+            }
+          }
+        </Field>
       </div>
       <button type='submit'>Submit</button>
     </Form>
