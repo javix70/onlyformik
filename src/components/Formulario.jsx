@@ -2,6 +2,7 @@ import React from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 //Schema Validation with Yup
 import * as Yup from 'yup'
+import TextError from "./TextError"
 
 const initialValues = {
   name: "",
@@ -9,6 +10,10 @@ const initialValues = {
   channel: "",
   comments: "",
   address: "",
+  social: {
+    facebook: "",
+    twitter: ""
+  }
 }
 const onSubmit = (values) => {
   console.log(values)
@@ -37,7 +42,7 @@ return (
           name='name'
           className='form-control'
         />
-        <ErrorMessage name='name' />
+        <ErrorMessage name='name' component={TextError} />
       </div>
       <div className="form-group">
         <label htmlFor='email'>E-mail</label>
@@ -47,7 +52,9 @@ return (
           name='email'
           className='form-control'
         />
-        <ErrorMessage name='email' />
+        <ErrorMessage name='email' >
+          {errorMsg => <div className="error-message">{errorMsg}</div>}
+        </ErrorMessage>
       </div>
       <div className="form-group">
         <label htmlFor='channel'>Channel</label>
@@ -70,6 +77,26 @@ return (
         <ErrorMessage name='comments' />
       </div>
       <div className="form-group">
+        <label htmlFor='facebook'>facebook</label>
+        <Field
+          type='textarea'
+          id='facebook'
+          name='social.facebook'
+          className='form-control '
+        />
+        <ErrorMessage name='facebook' />
+      </div>
+      <div className="form-group">
+        <label htmlFor='twitter'>twitter</label>
+        <Field
+          type='textarea'
+          id='twitter'
+          name='social.twitter'
+          className='form-control '
+        />
+        <ErrorMessage name='twitter' />
+      </div>
+      <div className="form-group">
         <label htmlFor='address'>Address</label>
         <Field
           name='address'
@@ -77,8 +104,8 @@ return (
         >
           {
             (props) => {
-              const { field, form, meta } = props
               console.log("Render Props", props)
+              const { field, form, meta } = props
               return <div>
                 <input type="text" id='address' {...field} />
                 {meta.touched && meta.error ? <div>{meta.error}</div> : null}
