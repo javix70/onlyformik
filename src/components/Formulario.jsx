@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from "formik"
 //Schema Validation with Yup
 import * as Yup from 'yup'
@@ -13,6 +13,19 @@ const initialValues = {
   social: {
     facebook: "",
     twitter: ""
+  },
+  phoneNumbers: ["", ""],
+  phNumbers: [""]
+}
+const savedValues = {
+  name: "Javier",
+  email: "javeiromar@gmail.com",
+  channel: "awa",
+  comments: "pegasos",
+  address: "507 address",
+  social: {
+    facebook: "fb",
+    twitter: "tw"
   },
   phoneNumbers: ["", ""],
   phNumbers: [""]
@@ -41,12 +54,14 @@ const validationComments = value => {
   return error
 }
 const Formulario = () => {
+  const [formValues, setFormValues] = useState(null)
 return (
   <Formik
     // Top level
-    initialValues={initialValues}
+    initialValues={formValues || initialValues}
     validationSchema={validationSchema}
     onSubmit={onSubmit}
+    enableReinitialize
     // validateOnMount //Muestra los error de los field.
     // validateOnChange={false} //valida field con onchange
     // validateOnBlur={false} //valida los field con touch
@@ -188,7 +203,7 @@ return (
             </FieldArray>
             <ErrorMessage name='phNumbers' />
           </div>
-          <button type="button" onClick={()=> formik.validateField("comments")}>Validate comment</button>
+          {/* <button type="button" onClick={()=> formik.validateField("comments")}>Validate comment</button>
           <button type="button" onClick={()=> formik.validateForm()}>Validate all</button>
           <button type="button" onClick={()=> formik.setFieldTouched("comments")}>Visit comment</button>
           <button type="button" onClick={()=> formik.setTouched({
@@ -196,7 +211,8 @@ return (
             email:true,
             channel:true,
             comments:true
-          })}>Visit all field</button>
+          })}>Visit all field</button> */}
+          <button type='submit' onClick={() =>setFormValues(savedValues)}>Load Data uwu</button>
           <button type='submit' disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
           {/* La condicion sería, si tengo los campos validos devuelveme false o si envio el formulario */}
           {/* <button type='submit' disabled={!formik.isValid}>Submit</button> */}
