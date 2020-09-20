@@ -1,5 +1,5 @@
 import React from "react"
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik"
+import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from "formik"
 //Schema Validation with Yup
 import * as Yup from 'yup'
 import TextError from "./TextError"
@@ -120,13 +120,14 @@ return (
       </div>
       <div className="form-group">
         <label htmlFor='address'>Address</label>
-        <Field
+        <FastField
           name='address'
           className='form-control '
         >
           {
             (props) => {
-              // console.log("Render Props", props)
+              console.log("Render")
+              
               const { field, form, meta } = props
               return <div>
                 <input type="text" id='address' {...field} />
@@ -134,7 +135,7 @@ return (
               </div>
             }
           }
-        </Field>
+        </FastField>
       </div>
       <div className="form-group">
         <label htmlFor='phNumbers'>List of phone numbers</label>
@@ -143,7 +144,7 @@ return (
           className='form-control '
         >
           {(fieldArrayProps) => {
-              console.log(fieldArrayProps)
+              // console.log(fieldArrayProps)
               const {form, push, remove} = fieldArrayProps
               const {values} = form
               const {phNumbers} = values
