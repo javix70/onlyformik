@@ -203,7 +203,9 @@ return (
             </FieldArray>
             <ErrorMessage name='phNumbers' />
           </div>
-          {/* <button type="button" onClick={()=> formik.validateField("comments")}>Validate comment</button>
+          {/* 
+          valida manualemnte los fields
+          <button type="button" onClick={()=> formik.validateField("comments")}>Validate comment</button>
           <button type="button" onClick={()=> formik.validateForm()}>Validate all</button>
           <button type="button" onClick={()=> formik.setFieldTouched("comments")}>Visit comment</button>
           <button type="button" onClick={()=> formik.setTouched({
@@ -211,7 +213,8 @@ return (
             email:true,
             channel:true,
             comments:true
-          })}>Visit all field</button> */}
+          })}>Visit all field</button> 
+          */}
           <button type='submit' onClick={() =>setFormValues(savedValues)}>Load Data uwu</button>
           <button type='submit' disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
           {/* La condicion sería, si tengo los campos validos devuelveme false o si envio el formulario */}
