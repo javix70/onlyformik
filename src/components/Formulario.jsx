@@ -17,8 +17,12 @@ const initialValues = {
   phoneNumbers: ["", ""],
   phNumbers: [""]
 }
-const onSubmit = (values) => {
-  console.log(values)
+const onSubmit = (values,onSubmitProps) => {
+  // console.log(values)
+  console.log("PropsOnsubmit", onSubmitProps)
+  setTimeout(() => {
+    onSubmitProps.setSubmitting(false);
+  }, 1000);
 }
 const validationSchema = Yup.object({
   name: Yup.string().required('Required!'),
@@ -193,7 +197,10 @@ return (
             channel:true,
             comments:true
           })}>Visit all field</button>
-          <button type='submit' disabled={!(formik.dirty && formik.isValid)}>Submit</button>
+          <button type='submit' disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
+          {/* La condicion sería, si tengo los campos validos devuelveme false o si envio el formulario */}
+          {/* <button type='submit' disabled={!formik.isValid}>Submit</button> */}
+          {/* <button type='submit' disabled={!(formik.dirty && formik.isValid)}>Submit</button> */}
           {/* formik.dirty retorna verdadero si el campo es distinto al initialValue */}
         </Form>
         )
