@@ -28,6 +28,13 @@ const validationSchema = Yup.object({
   channel: Yup.string().required('Required')
 })
 
+const validationComments = value => {
+  let error
+  if (!value) {
+    error = "Requerido!"
+  }
+  return error
+}
 const Formulario = () => {
 return (
   <Formik
@@ -76,9 +83,10 @@ return (
           type='textarea'
           id='comments'
           name='comments'
+          validate={validationComments}
           className='form-control '
         />
-        <ErrorMessage name='comments' />
+        <ErrorMessage name='comments' component={TextError}/>
       </div>
       <div className="form-group">
         <label htmlFor='facebook'>facebook</label>
