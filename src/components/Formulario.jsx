@@ -1,5 +1,5 @@
 import React from "react"
-import { Formik, Form, Field, ErrorMessage } from "formik"
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik"
 //Schema Validation with Yup
 import * as Yup from 'yup'
 import TextError from "./TextError"
@@ -14,7 +14,8 @@ const initialValues = {
     facebook: "",
     twitter: ""
   },
-  phoneNumbers: ["", ""]
+  phoneNumbers: ["", ""],
+  phNumbers: [""]
 }
 const onSubmit = (values) => {
   console.log(values)
@@ -125,7 +126,7 @@ return (
         >
           {
             (props) => {
-              console.log("Render Props", props)
+              // console.log("Render Props", props)
               const { field, form, meta } = props
               return <div>
                 <input type="text" id='address' {...field} />
@@ -134,6 +135,36 @@ return (
             }
           }
         </Field>
+      </div>
+      <div className="form-group">
+        <label htmlFor='phNumbers'>List of phone numbers</label>
+        <FieldArray
+          name='phNumbers'
+          className='form-control '
+        >
+          {(fieldArrayProps) => {
+              console.log(fieldArrayProps)
+              const {form, push, remove} = fieldArrayProps
+              const {values} = form
+              const {phNumbers} = values
+              return(
+                <div>
+                  {phNumbers.map((phNumbers,index)=>(
+                    <div key={index}>
+                      <Field
+                        name={`phNumbers[${index}]`}
+                      />
+                      {index > 0 && (
+                        <button type="button" onClick={() => remove(index)}> - </button>
+                      )}
+                      <button type="button" onClick={()=> push(index)}> + </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+          }
+        </FieldArray>
+        <ErrorMessage name='phNumbers' />
       </div>
       <button type='submit'>Submit</button>
     </Form>
