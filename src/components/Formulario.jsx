@@ -43,6 +43,7 @@ return (
     initialValues={initialValues}
     validationSchema={validationSchema}
     onSubmit={onSubmit}
+    // validateOnMount //Muestra los error de los field.
     // validateOnChange={false} //valida field con onchange
     // validateOnBlur={false} //valida los field con touch
   >
@@ -143,7 +144,7 @@ return (
                 (props) => {
                   // console.log("Render")
                   
-                  const { field, form, meta } = props
+                  const { field, meta } = props
                   return <div>
                     <input type="text" id='address' {...field} />
                     {meta.touched && meta.error ? <div>{meta.error}</div> : null}
@@ -192,7 +193,8 @@ return (
             channel:true,
             comments:true
           })}>Visit all field</button>
-          <button type='submit'>Submit</button>
+          <button type='submit' disabled={!(formik.dirty && formik.isValid)}>Submit</button>
+          {/* formik.dirty retorna verdadero si el campo es distinto al initialValue */}
         </Form>
         )
       }
