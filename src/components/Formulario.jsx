@@ -34,6 +34,8 @@ return (
     initialValues={initialValues}
     validationSchema={validationSchema}
     onSubmit={onSubmit}
+    // validateOnChange={false} //valida field con onchange
+    // validateOnBlur={false} //valida los field con touch
   >
     <Form >
       <div className="form-group">
@@ -126,7 +128,7 @@ return (
         >
           {
             (props) => {
-              console.log("Render")
+              // console.log("Render")
               
               const { field, form, meta } = props
               return <div>
@@ -147,6 +149,7 @@ return (
               // console.log(fieldArrayProps)
               const {form, push, remove} = fieldArrayProps
               const {values} = form
+              console.log(form.errors)
               const {phNumbers} = values
               return(
                 <div>
