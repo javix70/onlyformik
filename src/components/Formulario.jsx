@@ -36,6 +36,9 @@ const onSubmit = (values,onSubmitProps) => {
   setTimeout(() => {
     onSubmitProps.setSubmitting(false);
   }, 1000);
+  setTimeout(() => {
+    onSubmitProps.resetForm()
+  }, 1000);
 }
 const validationSchema = Yup.object({
   name: Yup.string().required('Required!'),
@@ -217,6 +220,7 @@ return (
           */}
           <button type='submit' onClick={() =>setFormValues(savedValues)}>Load Data uwu</button>
           <button type='submit' disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
+          <button type="reset">Reset</button>
           {/* La condicion sería, si tengo los campos validos devuelveme false o si envio el formulario */}
           {/* <button type='submit' disabled={!formik.isValid}>Submit</button> */}
           {/* <button type='submit' disabled={!(formik.dirty && formik.isValid)}>Submit</button> */}
